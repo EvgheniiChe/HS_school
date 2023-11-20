@@ -11,9 +11,11 @@
 |
 */
 
+use Database\Factories\CourseTypeFactory;
+
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+     Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
 )->in('Feature');
 
 /*
@@ -45,4 +47,9 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+function courseType(array $attributes = []): CourseTypeFactory
+{
+    return CourseTypeFactory::new($attributes);
 }

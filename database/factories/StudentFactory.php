@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
  */
-class UserFactory extends Factory
+class StudentFactory extends Factory
 {
     protected static ?string $password;
 
@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'telegram' => fake()->word,
         ];
     }
 
