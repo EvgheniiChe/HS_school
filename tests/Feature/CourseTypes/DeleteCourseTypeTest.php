@@ -12,6 +12,6 @@ it('can delete course type', function () {
     assertModelMissing($courseType);
 });
 
-it('cannot delete course type if there are unfinished courses', function () {
+it('cannot delete course type if there is a course uses this type', function () {
 
 })->skip('Написать');

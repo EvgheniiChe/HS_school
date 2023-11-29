@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->integer('type_id');
+            $table->integer('staff_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('course_types');
+            $table->foreign('staff_id')->references('id')->on('users');
         });
     }
 

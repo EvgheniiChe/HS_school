@@ -11,7 +11,12 @@
 |
 */
 
+use Database\Factories\CourseFactory;
 use Database\Factories\CourseTypeFactory;
+use Database\Factories\GroupFactory;
+use Database\Factories\LessonFactory;
+use Database\Factories\StaffFactory;
+use Database\Factories\UserFactory;
 
 uses(
     Tests\TestCase::class,
@@ -44,12 +49,27 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function user(array $attributes = []): UserFactory
 {
-    // ..
+    return UserFactory::new($attributes);
 }
 
 function courseType(array $attributes = []): CourseTypeFactory
 {
     return CourseTypeFactory::new($attributes);
+}
+
+function course(array $attributes = []): CourseFactory
+{
+    return CourseFactory::new($attributes);
+}
+
+function lesson(array $attributes = []): LessonFactory
+{
+    return LessonFactory::new($attributes);
+}
+
+function group(array $attributes = []): GroupFactory
+{
+    return GroupFactory::new($attributes);
 }
