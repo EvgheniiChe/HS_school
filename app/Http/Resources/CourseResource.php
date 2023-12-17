@@ -15,6 +15,7 @@ class CourseResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'courseType' => [
                 'title' => $this->type->title,
             ],
@@ -22,6 +23,7 @@ class CourseResource extends JsonResource
                 'name' => $this->staff->name,
                 'email' => $this->staff->email,
             ],
+            'lessons' => LessonResource::collection($this->whenLoaded('lessons')),
             'startDate' => $this->start_date,
             'endDate' => $this->end_date,
         ];

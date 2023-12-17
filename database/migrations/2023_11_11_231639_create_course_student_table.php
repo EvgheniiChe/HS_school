@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('course_student', function (Blueprint $table) {
             $table->id();
-            $table->integer('student_id');
             $table->integer('course_id');
+            $table->integer('student_id');
             $table->timestamps();
 
             $table->foreign('student_id')->references('id')->on('users');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_user');
+        Schema::dropIfExists('course_student');
     }
 };
