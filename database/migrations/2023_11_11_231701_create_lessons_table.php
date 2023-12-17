@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
-            $table->integer('group_id');
+            $table->integer('course_id');
             $table->string('theme');
-            $table->date('start_time');
+            $table->dateTime('start_time');
+            $table->text('info');
             $table->timestamps();
 
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

@@ -11,12 +11,33 @@
 |
 */
 
+use Database\Factories\CourseFactory;
+use Database\Factories\CourseStudentFactory;
 use Database\Factories\CourseTypeFactory;
+use Database\Factories\GroupFactory;
+use Database\Factories\LessonFactory;
+use Database\Factories\UserFactory;
 
 uses(
     Tests\TestCase::class,
      Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
 )->in('Feature');
+
+uses()
+    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->adminRole()->create()))
+    ->in('Feature/Admins');
+
+uses()
+    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->managerRole()->create()))
+    ->in('Feature/Managers');
+
+uses()
+    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->staffRole()->create()))
+    ->in('Feature/Staff');
+
+uses()
+    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->studentRole()->create()))
+    ->in('Feature/Students');
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +65,32 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function user(array $attributes = []): UserFactory
 {
-    // ..
+    return UserFactory::new($attributes);
 }
 
 function courseType(array $attributes = []): CourseTypeFactory
 {
     return CourseTypeFactory::new($attributes);
+}
+
+function course(array $attributes = []): CourseFactory
+{
+    return CourseFactory::new($attributes);
+}
+
+function lesson(array $attributes = []): LessonFactory
+{
+    return LessonFactory::new($attributes);
+}
+
+function group(array $attributes = []): GroupFactory
+{
+    return GroupFactory::new($attributes);
+}
+
+function courseStudent(array $attributes = []): CourseStudentFactory
+{
+    return CourseStudentFactory::new($attributes);
 }

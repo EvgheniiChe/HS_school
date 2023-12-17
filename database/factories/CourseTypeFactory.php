@@ -17,7 +17,7 @@ class CourseTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence,
+            'title' => 'Middle to Senior',
         ];
     }
 
