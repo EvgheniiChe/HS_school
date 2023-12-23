@@ -20,6 +20,7 @@ it('cannot delete course type if there is a course uses this type', function () 
         ->staff(user()->staffRole()->create())
         ->create();
 
-        deleteJson(route('admins.course-types.delete', $courseType))
-            ->assertUnprocessable();
+    actingAs(user()->adminRole()->create())
+        ->deleteJson(route('admins.course-types.delete', $courseType))
+                ->assertUnprocessable();
 });

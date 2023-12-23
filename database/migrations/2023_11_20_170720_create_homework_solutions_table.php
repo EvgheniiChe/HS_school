@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('homework_id');
             $table->integer('student_id');
-            $table->text('solution');
-            $table->text('comment');
+            $table->integer('staff_id');
+            $table->text('message');
             $table->timestamps();
 
             $table->foreign('homework_id')->references('id')->on('homeworks');
             $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('staff_id')->references('id')->on('users');
         });
     }
 

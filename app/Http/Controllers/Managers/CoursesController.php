@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Managers;
 
-use App\Http\Actions\Admins\Courses\DeleteCourseAction;
-use App\Http\Actions\Admins\Courses\StoreCourseAction;
-use App\Http\Actions\Admins\Courses\UpdateCourseAction;
+use App\Http\Actions\Courses\DeleteCourseAction;
+use App\Http\Actions\Courses\StoreCourseAction;
+use App\Http\Actions\Courses\UpdateCourseAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;

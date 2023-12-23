@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Http\Actions\Admins\Lessons\ShowLessonAction;
-use App\Http\Actions\Admins\Lessons\StoreLessonAction;
-use App\Http\Actions\Admins\Lessons\UpdateLessonAction;
+use App\Http\Actions\Lessons\ShowLessonAction;
+use App\Http\Actions\Lessons\StoreLessonAction;
+use App\Http\Actions\Lessons\UpdateLessonAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LessonRequest;
 use App\Http\Resources\LessonResource;

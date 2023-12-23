@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('lesson_id');
             $table->string('theme');
+            $table->text('info');
             $table->date('expiration_date');
             $table->timestamps();
 

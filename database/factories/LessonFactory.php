@@ -24,8 +24,13 @@ class LessonFactory extends Factory
         ];
     }
 
-    public function course(Course $course): self
+    public function course(Course $course): static
     {
         return $this->set('course_id', $course->id);
+    }
+
+    public function theme(string $theme): static
+    {
+        return $this->set('theme', $theme);
     }
 }

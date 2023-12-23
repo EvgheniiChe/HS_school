@@ -1,5 +1,6 @@
 <?php
 
+use function Pest\Laravel\actingAs;
 use function Pest\Laravel\patchJson;
 
 it('updates course type data', function () {
@@ -7,9 +8,10 @@ it('updates course type data', function () {
         ->title('Middle to Senior')
         ->create();
 
-    patchJson(route('admins.course-types.update', $courseType), [
-        'title' => 'Senior to Lead',
-    ]);
+    actingAs(user()->adminRole()->create())
+        ->patchJson(route('admins.course-types.update', $courseType), [
+            'title' => 'Senior to Lead',
+        ]);
 
     expect($courseType->refresh())
         ->title->toBe('Senior to Lead');

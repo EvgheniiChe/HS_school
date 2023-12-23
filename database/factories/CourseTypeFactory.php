@@ -21,7 +21,7 @@ class CourseTypeFactory extends Factory
         ];
     }
 
-    public function title(string $title): self
+    public function title(string $title): static
     {
         return $this->set('title', $title);
     }

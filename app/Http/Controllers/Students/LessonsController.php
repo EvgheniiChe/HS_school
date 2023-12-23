@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Students;
 
-use App\Http\Actions\Admins\Lessons\ShowLessonAction;
-use App\Http\Actions\Admins\Lessons\StoreLessonAction;
-use App\Http\Actions\Admins\Lessons\UpdateLessonAction;
+use App\Http\Actions\Lessons\ShowLessonAction;
+use App\Http\Actions\Lessons\StoreLessonAction;
+use App\Http\Actions\Lessons\UpdateLessonAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LessonRequest;
 use App\Http\Resources\LessonResource;
@@ -16,20 +16,12 @@ class LessonsController extends Controller
 {
     public function index(Course $course): AnonymousResourceCollection
     {
+        # @todo студент может видеть только свои уроки
         return LessonResource::collection(
             Lesson::query()
                 ->where('course_id', $course->id)
                 ->get()
         );
-    }
-
-    public function store(
-        LessonRequest $request,
-        Course $course,
-        StoreLessonAction $storeLesson
-    ): void
-    {
-        $storeLesson->execute($request, $course);
     }
 
     public function show(
@@ -41,26 +33,5 @@ class LessonsController extends Controller
         return new LessonResource(
             $showLesson->execute($course, $lesson)
         );
-    }
-
-    public function update(
-        LessonRequest $request,
-        Course $course,
-        Lesson $lesson,
-        UpdateLessonAction $updateLesson
-    ): void
-    {
-        $updateLesson->execute($request, $lesson);
-    }
-
-    public function destroy(
-        Course $course,
-        Lesson $lesson
-    ): void
-    {
-        # Мб не нужно
-        if ($lesson->course_id === $course->id) {
-            $lesson->delete();
-        }
     }
 }

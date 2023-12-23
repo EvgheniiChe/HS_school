@@ -44,7 +44,6 @@ class CourseStoreRequest extends FormRequest
     {
         return [
             'typeID' => ['required', 'integer', 'exists:course_types,id'],
-            # Проверка, что у юзера роль - учитель
             'staffID' => ['required', 'integer', 'exists:users,id'],
             'startDate' => ['required', 'date', 'before:endDate'],
             'endDate' => ['required', 'date', 'after:startDate'],

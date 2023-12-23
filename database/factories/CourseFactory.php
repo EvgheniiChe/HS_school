@@ -27,27 +27,27 @@ class CourseFactory extends Factory
         ];
     }
 
-    public function type(CourseType $type): self
+    public function type(CourseType $type): static
     {
         return $this->set('type_id', $type->id);
     }
 
-    public function staff(User $user): self
+    public function staff(User $user): static
     {
         return $this->set('staff_id', $user->id);
     }
 
-    public function startDate(string|Carbon $startDate): self
+    public function startDate(string|Carbon $startDate): static
     {
         return $this->set('start_date', $startDate);
     }
 
-    public function endDate(string|Carbon $endDate): self
+    public function endDate(string|Carbon $endDate): static
     {
         return $this->set('end_date', $endDate);
     }
 
-    public function withStaffAndType(): self
+    public function withStaffAndType(): static
     {
         $data = [
             'type_id' => courseType()->create()->id,

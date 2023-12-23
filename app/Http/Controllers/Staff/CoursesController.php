@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Http\Actions\Admins\Courses\DeleteCourseAction;
-use App\Http\Actions\Admins\Courses\StoreCourseAction;
-use App\Http\Actions\Admins\Courses\UpdateCourseAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CourseStoreRequest;
-use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

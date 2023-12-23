@@ -12,9 +12,9 @@
 */
 
 use Database\Factories\CourseFactory;
-use Database\Factories\CourseStudentFactory;
 use Database\Factories\CourseTypeFactory;
 use Database\Factories\GroupFactory;
+use Database\Factories\HomeworkFactory;
 use Database\Factories\LessonFactory;
 use Database\Factories\UserFactory;
 
@@ -23,21 +23,21 @@ uses(
      Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
 )->in('Feature');
 
-uses()
-    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->adminRole()->create()))
-    ->in('Feature/Admins');
-
-uses()
-    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->managerRole()->create()))
-    ->in('Feature/Managers');
-
-uses()
-    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->staffRole()->create()))
-    ->in('Feature/Staff');
-
-uses()
-    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->studentRole()->create()))
-    ->in('Feature/Students');
+//uses()
+//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->adminRole()->create()))
+//    ->in('Feature/Admins');
+//
+//uses()
+//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->managerRole()->create()))
+//    ->in('Feature/Managers');
+//
+//uses()
+//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->staffRole()->create()))
+//    ->in('Feature/Staff');
+//
+//uses()
+//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->studentRole()->create()))
+//    ->in('Feature/Students');
 
 /*
 |--------------------------------------------------------------------------
@@ -80,17 +80,17 @@ function course(array $attributes = []): CourseFactory
     return CourseFactory::new($attributes);
 }
 
-function lesson(array $attributes = []): LessonFactory
-{
-    return LessonFactory::new($attributes);
-}
-
 function group(array $attributes = []): GroupFactory
 {
     return GroupFactory::new($attributes);
 }
 
-function courseStudent(array $attributes = []): CourseStudentFactory
+function lesson(array $attributes = []): LessonFactory
 {
-    return CourseStudentFactory::new($attributes);
+    return LessonFactory::new($attributes);
+}
+
+function homework(array $attributes = []): HomeworkFactory
+{
+    return HomeworkFactory::new($attributes);
 }

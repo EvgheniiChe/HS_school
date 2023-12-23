@@ -1,13 +1,5 @@
 <?php
 
-/**use App\Http\Controllers\Admins\{
-    CoursesController, CourseStudentsController, CourseTypesController,
-    LessonsController, UserRolesController, UsersController
-};
-use App\Http\Controllers\Managers\{
-    CoursesController, CourseStudentsController, CourseTypesController,
-    LessonsController, UsersController
-};**/
 
 use App\Http\Controllers\Admins;
 use Illuminate\Support\Facades\Route;
@@ -46,9 +38,9 @@ Route::middleware('auth')->group(function () {
                     Route::delete('/{courseType}', 'destroy')->name('delete');
                 });
 
-            Route::prefix('courses/{course}/students')
-                ->name('courses.students.')
-                ->controller('CourseStudentsController')
+            Route::prefix('courses/{course}/student-group')
+                ->name('courses.student-group.')
+                ->controller('GroupsController')
                 ->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/{student}', 'store')->name('store');
@@ -82,6 +74,7 @@ Route::middleware('auth')->group(function () {
         ->prefix('managers')
         ->name('managers.')
         ->group(function () {
+
             Route::prefix('course-types')
                 ->name('course-types.')
                 ->controller('CourseTypesController')
@@ -93,9 +86,9 @@ Route::middleware('auth')->group(function () {
                     Route::delete('/{courseType}', 'destroy')->name('delete');
                 });
 
-            Route::prefix('courses/{course}/students')
-                ->name('courses.students.')
-                ->controller('CourseStudentsController')
+            Route::prefix('courses/{course}/student-group')
+                ->name('courses.student-group.')
+                ->controller('GroupsController')
                 ->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/{student}', 'store')->name('store');
@@ -126,6 +119,9 @@ Route::middleware('auth')->group(function () {
         ->prefix('staff')
         ->name('staff.')
         ->group(function () {
+            Route::resource('courses/{course}/lessons/{lesson}/homeworks', 'HomeworksController')
+                ->only(['store', 'show', 'update', 'destroy']);
+
             Route::resource('courses/{course}/lessons', 'LessonsController')
                 ->only(['index', 'store', 'show', 'update', 'destroy']);
 
@@ -147,6 +143,10 @@ Route::middleware('auth')->group(function () {
         ->prefix('students')
         ->name('students.')
         ->group(function () {
+            Route::resource('homeworks', 'HomeworksController')
+//                ->only(['index', 'show',]);
+                ->only(['show',]);
+
             Route::resource('courses/{course}/lessons', 'LessonsController')
                 ->only(['index', 'show',]);
 
