@@ -24,9 +24,8 @@ class CoursesController extends Controller
 
     public function store(
         CourseStoreRequest $request,
-        StoreCourseAction  $storeCourse
-    ): void
-    {
+        StoreCourseAction $storeCourse
+    ): void {
         $storeCourse->execute($request);
     }
 
@@ -37,10 +36,9 @@ class CoursesController extends Controller
 
     public function update(
         CourseUpdateRequest $request,
-        Course             $course,
+        Course $course,
         UpdateCourseAction $updateCourseAction
-    ): void
-    {
+    ): void {
         $updateCourseAction->execute($course, $request);
     }
 

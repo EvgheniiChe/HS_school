@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Enums\UserRole;
+
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\patchJson;
 
 it('can change user role from student to staff', function () {
     $student = user()
@@ -11,7 +11,7 @@ it('can change user role from student to staff', function () {
 
     actingAs(user()->adminRole()->create())
         ->patchJson(route('admins.users.role', $student), [
-            'role' => UserRole::STAFF
+            'role' => UserRole::STAFF,
         ])
         ->assertOk();
 

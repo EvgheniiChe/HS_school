@@ -2,7 +2,6 @@
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\postJson;
 
 it('creates new course type', function () {
     actingAs(user()->managerRole()->create())
@@ -24,5 +23,5 @@ it('wont create course if title is duplicate', function () {
         ->postJson(route('managers.course-types.store'), [
             'title' => 'Middle to Senior',
         ])
-            ->assertJsonValidationErrorFor('title');
+        ->assertJsonValidationErrorFor('title');
 });

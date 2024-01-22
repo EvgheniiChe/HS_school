@@ -15,29 +15,15 @@ use Database\Factories\CourseFactory;
 use Database\Factories\CourseTypeFactory;
 use Database\Factories\GroupFactory;
 use Database\Factories\HomeworkFactory;
+use Database\Factories\HomeworkSolutionFactory;
+use Database\Factories\HomeworkSolutionMessageFactory;
 use Database\Factories\LessonFactory;
 use Database\Factories\UserFactory;
 
 uses(
     Tests\TestCase::class,
-     Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
+    Illuminate\Foundation\Testing\LazilyRefreshDatabase::class,
 )->in('Feature');
-
-//uses()
-//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->adminRole()->create()))
-//    ->in('Feature/Admins');
-//
-//uses()
-//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->managerRole()->create()))
-//    ->in('Feature/Managers');
-//
-//uses()
-//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->staffRole()->create()))
-//    ->in('Feature/Staff');
-//
-//uses()
-//    ->beforeEach(fn() => \Pest\Laravel\actingAs(user()->studentRole()->create()))
-//    ->in('Feature/Students');
 
 /*
 |--------------------------------------------------------------------------
@@ -93,4 +79,14 @@ function lesson(array $attributes = []): LessonFactory
 function homework(array $attributes = []): HomeworkFactory
 {
     return HomeworkFactory::new($attributes);
+}
+
+function homeworkSolution(array $attributes = []): HomeworkSolutionFactory
+{
+    return HomeworkSolutionFactory::new($attributes);
+}
+
+function homeworkSolutionMessage(array $attributes = []): HomeworkSolutionMessageFactory
+{
+    return HomeworkSolutionMessageFactory::new($attributes);
 }

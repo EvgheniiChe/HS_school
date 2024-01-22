@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Date;
+
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\getJson;
 use function Pest\Laravel\travelTo;
 
 it('returns a list of courses', function () {
@@ -21,30 +21,30 @@ it('returns a list of courses', function () {
 
     actingAs(user()->adminRole()->create())
         ->getJson(route('admins.courses.index'))
-            ->assertOk()
-            ->assertJsonCount(3, 'data')
-            ->assertJsonStructure([
-                'data' => [
-                    [
-                        'id',
-                        'courseType' => [
-                            'title'
+        ->assertOk()
+        ->assertJsonCount(3, 'data')
+        ->assertJsonStructure([
+            'data' => [
+                [
+                    'id',
+                    'courseType' => [
+                        'title',
+                    ],
+                    'staff' => [
+                        'name',
+                        'email',
+                    ],
+                    'lessons' => [
+                        [
+                            'id',
+                            'theme',
+                            'startTime',
+                            'info',
                         ],
-                        'staff' => [
-                            'name',
-                            'email',
-                        ],
-                        'lessons' => [
-                            [
-                                'id',
-                                'theme',
-                                'startTime',
-                                'info',
-                            ]
-                        ],
-                        'startDate',
-                        'endDate',
-                    ]
-                ]
-            ]);
+                    ],
+                    'startDate',
+                    'endDate',
+                ],
+            ],
+        ]);
 });

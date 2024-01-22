@@ -23,9 +23,4 @@ class Group extends Model
     {
         return $this->belongsTo(User::class)->where('role', UserRole::STUDENT);
     }
-
-//    public function scopeWhereCourseIs(Builder $builder, Course $course): Builder
-//    {
-//        return $builder->where('course_id', $course->id);
-//    }
 }

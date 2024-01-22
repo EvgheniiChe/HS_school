@@ -23,8 +23,7 @@ class CourseTypesController extends Controller
     public function store(
         CourseTypeRequest $request,
         StoreCourseTypeAction $storeCourseType
-    ): void
-    {
+    ): void {
         $storeCourseType->execute($request->input('title'));
     }
 
@@ -37,8 +36,7 @@ class CourseTypesController extends Controller
         CourseTypeRequest $request,
         CourseType $courseType,
         UpdateCourseTypeAction $updateCourseTypeAction
-    ): void
-    {
+    ): void {
         $updateCourseTypeAction->execute($courseType, $request->input('title'));
     }
 

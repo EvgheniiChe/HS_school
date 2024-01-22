@@ -1,9 +1,7 @@
 <?php
 
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\postJson;
 
 it('can attach user to course', function () {
     $course = course()->withStaffAndType()->create();
@@ -11,7 +9,7 @@ it('can attach user to course', function () {
 
     actingAs(user()->managerRole()->create())
         ->postJson(route('managers.courses.student-group.store', [$course, $student]))
-            ->assertOk();
+        ->assertOk();
 
     assertDatabaseHas('groups', [
         'course_id' => $course->id,
@@ -27,8 +25,8 @@ it('cannot attach user to second course', function () {
 
     actingAs(user()->managerRole()->create())
         ->postJson(route('managers.courses.student-group.store', [$course, $student]))
-            ->assertUnprocessable()
-            ->assertJsonPath('message', 'This user already attached to the course');
+        ->assertUnprocessable()
+        ->assertJsonPath('message', 'This user already attached to the course');
 });
 
 it('cannot attach user with wrong role', function () {
@@ -37,6 +35,6 @@ it('cannot attach user with wrong role', function () {
 
     actingAs(user()->managerRole()->create())
         ->postJson(route('managers.courses.student-group.store', [$course, $student]))
-            ->assertUnprocessable()
-            ->assertJsonPath('message', 'This user is not a student');
+        ->assertUnprocessable()
+        ->assertJsonPath('message', 'This user is not a student');
 });

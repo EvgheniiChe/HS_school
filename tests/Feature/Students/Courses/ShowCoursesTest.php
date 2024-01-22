@@ -1,7 +1,6 @@
 <?php
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\getJson;
 
 it('returns the course data', function () {
     $student = user()->studentRole()->create();
@@ -16,20 +15,20 @@ it('returns the course data', function () {
 
     actingAs($student)
         ->getJson(route('students.courses.show', $course))
-            ->assertOk()
-            ->assertJson([
-                'data' => [
-                    'courseType' => [
-                        'title' => $course->type->title,
-                    ],
-                    'staff' => [
-                        'name' => $course->staff->name,
-                        'email' => $course->staff->email,
-                    ],
-                    'startDate' => $course->start_date,
-                    'endDate' => $course->end_date,
-                ]
-            ]);
+        ->assertOk()
+        ->assertJson([
+            'data' => [
+                'courseType' => [
+                    'title' => $course->type->title,
+                ],
+                'staff' => [
+                    'name' => $course->staff->name,
+                    'email' => $course->staff->email,
+                ],
+                'startDate' => $course->start_date,
+                'endDate' => $course->end_date,
+            ],
+        ]);
 });
 
 it('returns error when student try to open foreign course', function () {
@@ -44,5 +43,5 @@ it('returns error when student try to open foreign course', function () {
 
     actingAs($student)
         ->getJson(route('students.courses.show', $course))
-            ->assertNotFound();
+        ->assertNotFound();
 });

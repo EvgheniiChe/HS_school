@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Enums\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('telegram');
-            $table->string('role')->default(\App\Http\Enums\UserRole::STUDENT);
+            $table->string('role')->default(UserRole::STUDENT);
             $table->rememberToken();
             $table->timestamps();
         });

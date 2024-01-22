@@ -13,51 +13,47 @@ use App\Models\Homework;
 use App\Models\Lesson;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-
 class HomeworksController extends Controller
 {
-//    public function index(Course $course)
-//    {
-//        Course::query()
-//            ->join('course_types as t', 't.id', 'courses.type_id')
-//            ->join('lessons as l', 'l.course_id', 'courses.id')
-//            ->join('homeworks as h', 'h.lesson_id', 'l.id')
-//            ->get([
-//                'courses.id as course_id', 't.title', 'h.id as homework_id', 'l.id as lesson_id',
-//                'h.theme', 'h.info', 'h.expiration_date'
-//            ])->dd();
-//
-//        dd(Course::query()
-//            ->with(['type', 'lessons.homework'])
-//            ->where('id', $course->id)
-//            ->get()
-////            ->mapWithKeys(function (Course $course) {
-////                return [$course->id => $course->lessons->map(function (Lesson $lesson) {
-////                    return $lesson->homework;
-////                })];
-////            })
-//->toArray());
-//
-//        return Homework::query()
-//            ->whereIn('lesson_id', [
-//                Group::query()
-//                    ->with([
-//                        'course' => fn(Builder $query) => $query->where('staff_id', auth()->user()->id),
-//                        'course.lessons'
-//                    ])
-//            ])
-//            ->get();
-//    }
+    //    public function index(Course $course)
+    //    {
+    //        Course::query()
+    //            ->join('course_types as t', 't.id', 'courses.type_id')
+    //            ->join('lessons as l', 'l.course_id', 'courses.id')
+    //            ->join('homeworks as h', 'h.lesson_id', 'l.id')
+    //            ->get([
+    //                'courses.id as course_id', 't.title', 'h.id as homework_id', 'l.id as lesson_id',
+    //                'h.theme', 'h.info', 'h.expiration_date'
+    //            ])->dd();
+    //
+    //        dd(Course::query()
+    //            ->with(['type', 'lessons.homework'])
+    //            ->where('id', $course->id)
+    //            ->get()
+    ////            ->mapWithKeys(function (Course $course) {
+    ////                return [$course->id => $course->lessons->map(function (Lesson $lesson) {
+    ////                    return $lesson->homework;
+    ////                })];
+    ////            })
+    //->toArray());
+    //
+    //        return Homework::query()
+    //            ->whereIn('lesson_id', [
+    //                Group::query()
+    //                    ->with([
+    //                        'course' => fn(Builder $query) => $query->where('staff_id', auth()->user()->id),
+    //                        'course.lessons'
+    //                    ])
+    //            ])
+    //            ->get();
+    //    }
 
     public function store(
         HomeworkRequest $request,
         Course $course,
         Lesson $lesson,
         StoreHomeworkAction $storeHomework,
-    ): HomeworkResource
-    {
+    ): HomeworkResource {
         return new HomeworkResource(
             $storeHomework->execute($request, $lesson)
         );
@@ -67,8 +63,7 @@ class HomeworksController extends Controller
         Course $course,
         Lesson $lesson,
         Homework $homework
-    ): HomeworkResource
-    {
+    ): HomeworkResource {
         return new HomeworkResource($homework);
     }
 
@@ -78,8 +73,7 @@ class HomeworksController extends Controller
         Lesson $lesson,
         Homework $homework,
         UpdateHomeworkDataAction $updateHomeworkData
-    ): HomeworkResource
-    {
+    ): HomeworkResource {
         return new HomeworkResource(
             $updateHomeworkData->execute($request, $homework)
         );
@@ -89,9 +83,8 @@ class HomeworksController extends Controller
         Course $course,
         Lesson $lesson,
         Homework $homework,
-    ): void
-    {
-        # @todo проверка перед удалением
+    ): void {
+        // @todo проверка перед удалением
         $homework->delete();
     }
 }

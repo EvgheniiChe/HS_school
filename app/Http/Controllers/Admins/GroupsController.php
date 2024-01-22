@@ -16,11 +16,11 @@ class GroupsController extends Controller
 {
     public function index(Course $course): AnonymousResourceCollection
     {
-        # Список студентов курса
+        // Список студентов курса
         return UserResource::collection(
             User::query()
                 ->with([
-                    'course' => fn(Builder $builder) => $builder->where('course_id', $course->id)
+                    'course' => fn (Builder $builder) => $builder->where('course_id', $course->id),
                 ])
                 ->where('role', UserRole::STUDENT)
                 ->get()
@@ -31,8 +31,7 @@ class GroupsController extends Controller
         Course $course,
         User $student,
         AttachStudentToCourseAction $attachStudentToCourse,
-    ): void
-    {
+    ): void {
         $attachStudentToCourse->execute($course, $student);
     }
 
@@ -40,8 +39,7 @@ class GroupsController extends Controller
         Course $course,
         User $student,
         DetachStudentFromCourseAction $detachStudentFromCourse
-    ): void
-    {
+    ): void {
         $detachStudentFromCourse->execute($course, $student);
     }
 }

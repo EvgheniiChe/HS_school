@@ -24,8 +24,7 @@ class LessonsController extends Controller
         Course $course,
         Lesson $lesson,
         ShowLessonAction $showLesson
-    ): LessonResource
-    {
+    ): LessonResource {
         return new LessonResource(
             $showLesson->execute($course, $lesson)
         );

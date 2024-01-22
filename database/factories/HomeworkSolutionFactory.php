@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Enums\SolutionStatus;
 use App\Models\Homework;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,7 +20,7 @@ class HomeworkSolutionFactory extends Factory
     public function definition(): array
     {
         return [
-            'message' => fake()->sentence(4),
+            'homework_id' => 1,
         ];
     }
 
@@ -33,13 +34,13 @@ class HomeworkSolutionFactory extends Factory
         return $this->set('student_id', $user->id);
     }
 
-    public function staff(User $user): static
+    public function opened(): static
     {
-        return $this->set('staff_id', $user->id);
+        return $this->set('status', SolutionStatus::OPENED);
     }
 
-    public function message(string $message): static
+    public function closed(): static
     {
-        return $this->set('message', $message);
+        return $this->set('status', SolutionStatus::CLOSED);
     }
 }

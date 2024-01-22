@@ -15,8 +15,7 @@ class UserRolesController extends Controller
         Request $request,
         User $user,
         SetUserRoleAction $setUserRole
-    ): void
-    {
+    ): void {
         $request->validate([
             'role' => ['required', Rule::in(UserRole::roles)],
         ]);

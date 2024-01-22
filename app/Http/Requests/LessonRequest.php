@@ -22,9 +22,9 @@ class LessonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'theme' => ['required', 'string', 'max:255',],
-            'startTime' => ['required', 'date',],
-            'info' => ['required', 'string',],
+            'theme' => ['required', 'string', 'max:255'],
+            'startTime' => ['required', 'date'],
+            'info' => ['required', 'string'],
         ];
     }
 }

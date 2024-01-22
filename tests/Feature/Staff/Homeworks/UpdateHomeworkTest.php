@@ -20,7 +20,7 @@ it('can update homework and return it', function () {
     actingAs($staff)
         ->patchJson(route('staff.homeworks.update', [$course, $lesson, $homework]), [
             'info' => 'Купить пиццу и написать пару строчек кода',
-            'expirationDate' => now()->addWeeks(2)
+            'expirationDate' => now()->addWeeks(2),
         ])
         ->assertOk();
 
@@ -48,12 +48,11 @@ it('cannot set expirationDate less than current day', function () {
     actingAs($staff)
         ->patchJson(route('staff.homeworks.update', [$course, $lesson, $homework]), [
             'info' => $homework->info,
-            'expirationDate' => now()->subDay()
+            'expirationDate' => now()->subDay(),
         ])
         ->assertJsonValidationErrors([
             'expirationDate' => [
-                'The expiration date field must be a date after now.'
-            ]
+                'The expiration date field must be a date after now.',
+            ],
         ]);
 });
-

@@ -1,7 +1,6 @@
 <?php
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\postJson;
 
 it('creates a new course', function () {
     $typeID = courseType()->create()->id;

@@ -51,7 +51,7 @@ class CourseFactory extends Factory
     {
         $data = [
             'type_id' => courseType()->create()->id,
-            'staff_id' => user()->staffRole()->create()->id
+            'staff_id' => user()->staffRole()->create()->id,
         ];
 
         return $this->state($data);

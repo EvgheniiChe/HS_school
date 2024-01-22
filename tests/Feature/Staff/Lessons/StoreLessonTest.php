@@ -2,7 +2,6 @@
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\postJson;
 
 it('creates new lesson', function () {
     actingAs(user()->staffRole()->create())

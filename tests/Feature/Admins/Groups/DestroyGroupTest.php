@@ -2,7 +2,6 @@
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertModelMissing;
-use function Pest\Laravel\deleteJson;
 
 it('can delete CourseStudent entry', function () {
     $courseStudent = group()
@@ -12,7 +11,7 @@ it('can delete CourseStudent entry', function () {
 
     actingAs(user()->adminRole()->create())
         ->deleteJson(route('admins.courses.student-group.delete', [$course, $student]))
-            ->assertOk();
+        ->assertOk();
 
     assertModelMissing($courseStudent);
 });

@@ -27,8 +27,7 @@ class LessonsController extends Controller
         LessonRequest $request,
         Course $course,
         StoreLessonAction $storeLesson
-    ): void
-    {
+    ): void {
         $storeLesson->execute($request, $course);
     }
 
@@ -36,8 +35,7 @@ class LessonsController extends Controller
         Course $course,
         Lesson $lesson,
         ShowLessonAction $showLesson
-    ): LessonResource
-    {
+    ): LessonResource {
         return new LessonResource(
             $showLesson->execute($course, $lesson)
         );
@@ -48,17 +46,15 @@ class LessonsController extends Controller
         Course $course,
         Lesson $lesson,
         UpdateLessonAction $updateLesson
-    ): void
-    {
+    ): void {
         $updateLesson->execute($request, $lesson);
     }
 
     public function destroy(
         Course $course,
         Lesson $lesson
-    ): void
-    {
-        # Мб не нужно
+    ): void {
+        // Мб не нужно
         if ($lesson->course_id === $course->id) {
             $lesson->delete();
         }

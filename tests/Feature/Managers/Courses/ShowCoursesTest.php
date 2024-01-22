@@ -1,7 +1,6 @@
 <?php
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\getJson;
 
 it('returns the course data', function () {
     $course = course()
@@ -11,18 +10,18 @@ it('returns the course data', function () {
 
     actingAs(user()->managerRole()->create())
         ->getJson(route('managers.courses.show', $course))
-            ->assertOk()
-            ->assertJson([
-                'data' => [
-                    'courseType' => [
-                        'title' => $course->type->title,
-                    ],
-                    'staff' => [
-                        'name' => $course->staff->name,
-                        'email' => $course->staff->email,
-                    ],
-                    'startDate' => $course->start_date,
-                    'endDate' => $course->end_date,
-                ]
-            ]);
+        ->assertOk()
+        ->assertJson([
+            'data' => [
+                'courseType' => [
+                    'title' => $course->type->title,
+                ],
+                'staff' => [
+                    'name' => $course->staff->name,
+                    'email' => $course->staff->email,
+                ],
+                'startDate' => $course->start_date,
+                'endDate' => $course->end_date,
+            ],
+        ]);
 });

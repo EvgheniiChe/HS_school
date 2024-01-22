@@ -12,7 +12,7 @@ class CoursesController extends Controller
 {
     public function index(): CourseResource
     {
-        # @todo мб уроки подгружать не нужно
+        // @todo мб уроки подгружать не нужно
 
         return new CourseResource(
             Group::query()

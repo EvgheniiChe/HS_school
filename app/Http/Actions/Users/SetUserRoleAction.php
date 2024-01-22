@@ -9,7 +9,7 @@ class SetUserRoleAction
     public function execute(User $user, string $role): void
     {
         $user->update([
-            'role' => $role
+            'role' => $role,
         ]);
     }
 }

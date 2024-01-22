@@ -12,7 +12,7 @@ class Homework extends Model
 
     protected $table = 'homeworks';
 
-    protected $fillable = ['lesson_id', 'theme', 'info', 'expiration_date', ];
+    protected $fillable = ['lesson_id', 'theme', 'info', 'expiration_date'];
 
     public function lesson(): BelongsTo
     {

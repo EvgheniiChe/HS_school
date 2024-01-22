@@ -1,7 +1,6 @@
 <?php
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\patchJson;
 
 it('update the course', function () {
     $course = course()

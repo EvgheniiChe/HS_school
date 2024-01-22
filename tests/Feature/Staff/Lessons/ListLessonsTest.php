@@ -1,7 +1,6 @@
 <?php
 
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\getJson;
 
 it('returns a list of lessons based by course', function () {
     $course = course()
@@ -14,19 +13,19 @@ it('returns a list of lessons based by course', function () {
 
     actingAs(user()->staffRole()->create())
         ->getJson(route('staff.lessons.index', $course))
-            ->assertOk()
-            ->assertJsonCount(3, 'data')
-            ->assertJsonStructure([
-                'data' => [
-                    [
-                        'id',
-                        'course' => ['title'],
-                        'theme',
-                        'startTime',
-                        'info'
-                    ]
-                ]
-            ]);
+        ->assertOk()
+        ->assertJsonCount(3, 'data')
+        ->assertJsonStructure([
+            'data' => [
+                [
+                    'id',
+                    'course' => ['title'],
+                    'theme',
+                    'startTime',
+                    'info',
+                ],
+            ],
+        ]);
 });
 
 it('returns only lessons belong to course', function () {
@@ -44,6 +43,6 @@ it('returns only lessons belong to course', function () {
 
     actingAs(user()->staffRole()->create())
         ->getJson(route('staff.lessons.index', $courseWithoutLessons))
-            ->assertOk()
-            ->assertJsonCount(0, 'data');
+        ->assertOk()
+        ->assertJsonCount(0, 'data');
 });
