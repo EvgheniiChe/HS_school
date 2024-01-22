@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Group::class, 'student_id');
     }
+
+    public function isStuff(): bool
+    {
+        return $this->role->value === UserRole::STAFF->value;
+    }
 }
