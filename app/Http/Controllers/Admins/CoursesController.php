@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Http\Actions\Admins\Courses\DeleteCourseAction;
-use App\Http\Actions\Admins\Courses\StoreCourseAction;
-use App\Http\Actions\Admins\Courses\UpdateCourseAction;
+use App\Http\Actions\Courses\DeleteCourseAction;
+use App\Http\Actions\Courses\StoreCourseAction;
+use App\Http\Actions\Courses\UpdateCourseAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
@@ -24,9 +24,8 @@ class CoursesController extends Controller
 
     public function store(
         CourseStoreRequest $request,
-        StoreCourseAction  $storeCourse
-    ): void
-    {
+        StoreCourseAction $storeCourse
+    ): void {
         $storeCourse->execute($request);
     }
 
@@ -37,10 +36,9 @@ class CoursesController extends Controller
 
     public function update(
         CourseUpdateRequest $request,
-        Course             $course,
+        Course $course,
         UpdateCourseAction $updateCourseAction
-    ): void
-    {
+    ): void {
         $updateCourseAction->execute($course, $request);
     }
 

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,18 +19,17 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'student_id' => 1,
-            'course_id' => 1,
+            //
         ];
     }
 
-    public function course(int $courseID): self
+    public function course(Course $course): static
     {
-        return $this->set('course_id', $courseID);
+        return $this->set('course_id', $course->id);
     }
 
-    public function student(int $studentID): self
+    public function student(User $user): static
     {
-        return $this->set('student_id', $studentID);
+        return $this->set('student_id', $user->id);
     }
 }

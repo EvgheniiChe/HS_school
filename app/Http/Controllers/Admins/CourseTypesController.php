@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Http\Actions\Admins\CourseTypes\DeleteCourseTypeAction;
-use App\Http\Actions\Admins\CourseTypes\StoreCourseTypeAction;
-use App\Http\Actions\Admins\CourseTypes\UpdateCourseTypeAction;
+use App\Http\Actions\CourseTypes\DeleteCourseTypeAction;
+use App\Http\Actions\CourseTypes\StoreCourseTypeAction;
+use App\Http\Actions\CourseTypes\UpdateCourseTypeAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseTypeRequest;
 use App\Http\Resources\CourseTypeResource;
@@ -23,8 +23,7 @@ class CourseTypesController extends Controller
     public function store(
         CourseTypeRequest $request,
         StoreCourseTypeAction $storeCourseType
-    ): void
-    {
+    ): void {
         $storeCourseType->execute($request->input('title'));
     }
 
@@ -37,8 +36,7 @@ class CourseTypesController extends Controller
         CourseTypeRequest $request,
         CourseType $courseType,
         UpdateCourseTypeAction $updateCourseTypeAction
-    ): void
-    {
+    ): void {
         $updateCourseTypeAction->execute($courseType, $request->input('title'));
     }
 

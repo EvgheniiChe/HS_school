@@ -1,7 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use function Pest\Laravel\getJson;
+
+use function Pest\Laravel\actingAs;
 
 it('returns lesson data', function () {
     $lesson = lesson()
@@ -12,7 +13,8 @@ it('returns lesson data', function () {
         )
         ->create();
 
-    getJson(route('staff.lessons.show', [$course, $lesson]))
+    actingAs(user()->staffRole()->create())
+        ->getJson(route('staff.lessons.show', [$course, $lesson]))
         ->assertOk()
         ->assertJson([
             'data' => [
@@ -23,6 +25,6 @@ it('returns lesson data', function () {
                 'theme' => $lesson->theme,
                 'startTime' => Carbon::parse($lesson->start_time)->format('Y-m-d H:i:s'),
                 'info' => $lesson->info,
-            ]
+            ],
         ]);
 });

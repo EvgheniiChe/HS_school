@@ -1,6 +1,6 @@
 <?php
 
-use function Pest\Laravel\getJson;
+use function Pest\Laravel\actingAs;
 
 it('returns a list of course types', function () {
     courseType()
@@ -10,7 +10,8 @@ it('returns a list of course types', function () {
             ['title' => 'Tech Lead'],
         ]);
 
-    getJson(route('managers.course-types.index'))
+    actingAs(user()->managerRole()->create())
+        ->getJson(route('managers.course-types.index'))
         ->assertOk()
         ->assertJsonCount(3, 'data')
         ->assertJsonStructure([
@@ -18,7 +19,7 @@ it('returns a list of course types', function () {
                 [
                     'id',
                     'title',
-                ]
-            ]
+                ],
+            ],
         ]);
 });

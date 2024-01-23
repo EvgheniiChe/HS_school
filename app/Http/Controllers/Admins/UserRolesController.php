@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admins;
 
-use App\Http\Actions\Admins\Users\SetUserRoleAction;
+use App\Http\Actions\Users\SetUserRoleAction;
 use App\Http\Controllers\Controller;
 use App\Http\Enums\UserRole;
 use App\Models\User;
@@ -15,8 +15,7 @@ class UserRolesController extends Controller
         Request $request,
         User $user,
         SetUserRoleAction $setUserRole
-    ): void
-    {
+    ): void {
         $request->validate([
             'role' => ['required', Rule::in(UserRole::roles)],
         ]);

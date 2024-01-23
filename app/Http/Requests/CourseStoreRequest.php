@@ -4,9 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\Validator;
-use phpDocumentor\Reflection\Types\Collection;
 
 class CourseStoreRequest extends FormRequest
 {
@@ -44,7 +42,6 @@ class CourseStoreRequest extends FormRequest
     {
         return [
             'typeID' => ['required', 'integer', 'exists:course_types,id'],
-            # Проверка, что у юзера роль - учитель
             'staffID' => ['required', 'integer', 'exists:users,id'],
             'startDate' => ['required', 'date', 'before:endDate'],
             'endDate' => ['required', 'date', 'after:startDate'],
@@ -54,7 +51,7 @@ class CourseStoreRequest extends FormRequest
     public function withValidator($validator): void
     {
         $validator->after(function (Validator $validator) {
-            if (!$validator->errors()->any() && $this->input('startDate') < now()) {
+            if (! $validator->errors()->any() && $this->input('startDate') < now()) {
                 $validator->errors()->add('startDate', 'Course cant start in the past!');
             }
         });

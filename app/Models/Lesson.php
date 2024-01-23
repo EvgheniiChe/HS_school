@@ -16,4 +16,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function homework()
+    {
+        return $this->hasOne(Homework::class);
+    }
 }

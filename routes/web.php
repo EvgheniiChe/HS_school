@@ -1,15 +1,5 @@
 <?php
 
-/**use App\Http\Controllers\Admins\{
-    CoursesController, CourseStudentsController, CourseTypesController,
-    LessonsController, UserRolesController, UsersController
-};
-use App\Http\Controllers\Managers\{
-    CoursesController, CourseStudentsController, CourseTypesController,
-    LessonsController, UsersController
-};**/
-
-use App\Http\Controllers\Admins;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    # Админские роуты
+    // Админские роуты
     Route::middleware('role:admin')
         ->namespace('App\Http\Controllers\Admins\\')
         ->prefix('admins')
@@ -46,9 +36,9 @@ Route::middleware('auth')->group(function () {
                     Route::delete('/{courseType}', 'destroy')->name('delete');
                 });
 
-            Route::prefix('courses/{course}/students')
-                ->name('courses.students.')
-                ->controller('CourseStudentsController')
+            Route::prefix('courses/{course}/student-group')
+                ->name('courses.student-group.')
+                ->controller('GroupsController')
                 ->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/{student}', 'store')->name('store');
@@ -74,14 +64,15 @@ Route::middleware('auth')->group(function () {
 
             Route::get('users', 'UsersController')
                 ->name('users');
-    });
+        });
 
-    # Менеджерские роуты
+    // Менеджерские роуты
     Route::middleware('role:manager')
         ->namespace('App\Http\Controllers\Managers\\')
         ->prefix('managers')
         ->name('managers.')
         ->group(function () {
+
             Route::prefix('course-types')
                 ->name('course-types.')
                 ->controller('CourseTypesController')
@@ -93,9 +84,9 @@ Route::middleware('auth')->group(function () {
                     Route::delete('/{courseType}', 'destroy')->name('delete');
                 });
 
-            Route::prefix('courses/{course}/students')
-                ->name('courses.students.')
-                ->controller('CourseStudentsController')
+            Route::prefix('courses/{course}/student-group')
+                ->name('courses.student-group.')
+                ->controller('GroupsController')
                 ->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/{student}', 'store')->name('store');
@@ -103,7 +94,7 @@ Route::middleware('auth')->group(function () {
                 });
 
             Route::resource('courses/{course}/lessons', 'LessonsController')
-                ->only(['index', 'show',]);
+                ->only(['index', 'show']);
 
             Route::prefix('courses')
                 ->name('courses.')
@@ -118,14 +109,23 @@ Route::middleware('auth')->group(function () {
 
             Route::get('users', 'UsersController')
                 ->name('users');
-    });
+        });
 
-    # Учительские роуты
+    // Учительские роуты
     Route::middleware('role:staff')
         ->namespace('App\Http\Controllers\Staff\\')
         ->prefix('staff')
         ->name('staff.')
         ->group(function () {
+            Route::patch('homework-solution-status', 'HomeworkSolutionStatusesController')
+                ->name('homework-solution-status');
+
+            Route::resource('homework-solutions/{solution}/message', 'HomeworkSolutionMessagesController')
+                ->only('index', 'post');
+
+            Route::resource('courses/{course}/lessons/{lesson}/homeworks', 'HomeworksController')
+                ->only(['store', 'show', 'update', 'destroy']);
+
             Route::resource('courses/{course}/lessons', 'LessonsController')
                 ->only(['index', 'store', 'show', 'update', 'destroy']);
 
@@ -139,18 +139,25 @@ Route::middleware('auth')->group(function () {
 
             Route::get('users', 'UsersController')
                 ->name('users');
-    });
+        });
 
-    # Ученические роуты
+    // Ученические роуты
     Route::middleware('role:student')
         ->namespace('App\Http\Controllers\Students\\')
         ->prefix('students')
         ->name('students.')
         ->group(function () {
+            Route::resource('homework-solutions/{solution}/message', 'HomeworkSolutionMessagesController')
+                ->only(['index', 'store']);
+
+            Route::resource('homeworks', 'HomeworksController')
+//                ->only(['index', 'show',]);
+                ->only(['show']);
+
             Route::resource('courses/{course}/lessons', 'LessonsController')
-                ->only(['index', 'show',]);
+                ->only(['index', 'show']);
 
             Route::resource('courses', 'CoursesController')
-                ->only(['index', 'show',]);
-    });
+                ->only(['index', 'show']);
+        });
 });

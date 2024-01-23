@@ -55,6 +55,11 @@ class User extends Authenticatable
 
     public function course(): HasOne
     {
-        return $this->hasOne(CourseStudent::class, 'student_id');
+        return $this->hasOne(Group::class, 'student_id');
+    }
+
+    public function isStuff(): bool
+    {
+        return $this->role->value === UserRole::STAFF->value;
     }
 }

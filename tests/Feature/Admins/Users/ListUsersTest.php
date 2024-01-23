@@ -1,15 +1,15 @@
 <?php
 
-use function Pest\Laravel\getJson;
+use function Pest\Laravel\actingAs;
 
 it('returns a list of users', function () {
-    # Админ уже создан, от его лица выполняется запрос
     user()->managerRole()->create();
     user()->staffRole()->create();
     user()->studentRole()->create();
     user()->studentRole()->create();
 
-    getJson(route('admins.users'))
+    actingAs(user()->adminRole()->create())
+        ->getJson(route('admins.users'))
         ->assertOk()
         ->assertJsonCount(5, 'data')
         ->assertJsonStructure([
@@ -20,7 +20,7 @@ it('returns a list of users', function () {
                     'email',
                     'telegram',
                     'role',
-                ]
-            ]
+                ],
+            ],
         ]);
 });
