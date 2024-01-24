@@ -144,6 +144,8 @@ return [
         // 'store' => 'redis',
     ],
 
+    'notifications_queue' => env('NOTIFICATIONS_QUEUE', 'default'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\HomeworkSolutionMessageResource;
 use App\Models\HomeworkSolution;
 use App\Models\HomeworkSolutionMessage;
+use App\Notifications\StudentHomeworkSolutionNotice;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -30,6 +31,8 @@ class HomeworkSolutionMessagesController extends Controller
             'message' => $request->message,
         ]);
 
-        //@todo ивент студенту об ответе на домашку
+        $solution->student->notify(new StudentHomeworkSolutionNotice(
+            $solution
+        ));
     }
 }

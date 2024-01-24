@@ -7,6 +7,7 @@ use App\Http\Resources\HomeworkSolutionMessageResource;
 use App\Models\Homework;
 use App\Models\HomeworkSolution;
 use App\Models\HomeworkSolutionMessage;
+use App\Notifications\StaffHomeworkSolutionNotice;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -25,24 +26,29 @@ class HomeworkSolutionMessagesController extends Controller
             'message' => ['required', 'string'],
         ]);
 
-        $solution = HomeworkSolution::query()
-            ->firstOrCreate([
-                'homework_id' => $homework->id,
-                'student_id' => auth()->user()->id,
-            ]);
+        $student = auth()->user()->id;
 
-        HomeworkSolutionMessage::create([
+        $solution = HomeworkSolution::query()
+            ->where([
+                'homework_id' => $homework->id,
+                'student_id' => $student,
+            ])->first();
+
+        if (blank($solution)) {
+            $solution = HomeworkSolution::create([
+                'homework_id' => $homework->id,
+                'student_id' => $student,
+            ]);
+        }
+
+        $homeworkSolution = HomeworkSolutionMessage::create([
             'solution_id' => $solution->id,
             'author_id' => $solution->student_id,
             'message' => $request->message,
         ]);
 
-        //@todo ивент учителю о новой домашке
+        $homework->lesson->course->staff->notify(new StaffHomeworkSolutionNotice(
+            $homeworkSolution, $student
+        ));
     }
-
-    //    #@todo мб стоит разделить создание "чата" с решением ДЗ и отправкой туда сообщений
-    //    public function update(HomeworkSolutionMessage $message)
-    //    {
-    //
-    //    }
 }
