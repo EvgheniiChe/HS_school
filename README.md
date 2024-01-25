@@ -15,7 +15,6 @@
 - <code style="color: red; background: none "> Использовать изученные паттерны проектирования.</code>
 - <code style="color : red; background: none"> Прикрутить frontend.</code>
 
-
 ### Используемые технологии
 - Laravel 10 / PHP 8.3
 - PostgreSQL 15
