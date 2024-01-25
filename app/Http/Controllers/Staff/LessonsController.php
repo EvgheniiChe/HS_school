@@ -54,7 +54,6 @@ class LessonsController extends Controller
         Course $course,
         Lesson $lesson
     ): void {
-        // Мб не нужно
         // @todo проверка, что нет выполненных ДЗ
         if ($lesson->course_id === $course->id) {
             $lesson->delete();
